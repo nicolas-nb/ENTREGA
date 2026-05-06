@@ -20,6 +20,7 @@ const bookinstances = [];
 const avaliations = [];
 
 const mongoose = require("mongoose");
+const book = require("./models/book");
 
 const mongoDB = userArgs[0] || "mongodb://127.0.0.1:27017/sla";
 if (!userArgs[0]) {
@@ -194,6 +195,14 @@ async function createBooks() {
             "ISBN222222",
             authors[4],
             false
+        ),
+        bookCreate(
+            7,
+            "Licro Criado por Nicolas",
+            "O Livro mais zika do mundo",
+            "ISBN333333",
+            authors[4],
+            [genres[0]]
         ),
     ]);
 }
