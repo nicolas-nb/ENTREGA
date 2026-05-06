@@ -24,12 +24,12 @@ const book = require("./models/book");
 const author = require("./models/author");
 const genre = require("./models/genre");
 
-const mongoDB = userArgs[0] || "mongodb://127.0.0.1:27017/sla";
-if (!userArgs[0]) {
-    console.log(
-        "No MongoDB URI provided. Using fallback: mongodb://127.0.0.1:27017/sla"
-    );
-}
+const mongoDB =
+    userArgs[0] ||
+    process.env.MONGODB_URI ||
+    "mongodb+srv://segurinfo:KvjlQtPCSqyPuK1E@biblioteca.al8d9iv.mongodb.net/?appName=biblioteca";
+
+console.log(`Using MongoDB URI: ${mongoDB}`);
 
 main().catch((err) => console.log(err));
 
@@ -104,6 +104,7 @@ async function createGenres() {
         genreCreate(1, "Science Fiction"),
         genreCreate(2, "French Poetry"),
         genreCreate(3, "Horror"),
+        genreCreate(4, "Adventure"),
     ]);
 }
 
@@ -274,8 +275,8 @@ async function createBookInstances() {
             false,
             "Available"
         ),
-        bookInstanceCreate(9, books[0], "Imprint XXX2", false, false),
-        bookInstanceCreate(10, books[1], "Imprint XXX3", false, false),
+        bookInstanceCreate(10, books[0], "Imprint XXX2", false, false),
+        bookInstanceCreate(11, books[1], "Imprint XXX3", false, false),
     ]);
 
 }
