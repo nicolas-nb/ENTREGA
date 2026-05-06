@@ -21,6 +21,8 @@ const avaliations = [];
 
 const mongoose = require("mongoose");
 const book = require("./models/book");
+const author = require("./models/author");
+const genre = require("./models/genre");
 
 const mongoDB = userArgs[0] || "mongodb://127.0.0.1:27017/sla";
 if (!userArgs[0]) {
@@ -101,6 +103,7 @@ async function createGenres() {
         genreCreate(0, "Fantasy"),
         genreCreate(1, "Science Fiction"),
         genreCreate(2, "French Poetry"),
+        genreCreate(3, "Horror"),
     ]);
 }
 
@@ -110,6 +113,8 @@ async function createAvaliations() {
         avaliationCreate(0, "John Doe", 5, "Amazing book!"),
         avaliationCreate(1, "Jane Smith", 4, "Great read, but a bit slow in the middle."),
         avaliationCreate(2, "Alice Johnson", 3, "It was okay, not my favorite."),
+        avaliationCreate(3, "Bob Brown", 2, "I didn't enjoy this book."),
+         avaliationCreate(4, "Charlie Davis", 1, "Terrible book, I couldn't finish it."),
     ]);
 }
 
@@ -134,6 +139,7 @@ async function createAuthors() {
         authorCreate(2, "Isaac", "Asimov", "1920-01-02", "1992-04-06"),
         authorCreate(3, "Bob", "Billings", false, false),
         authorCreate(4, "Jim", "Jones", "1971-12-16", false),
+        authorCreate(5, "Nicolas", "Santana", "2002-11-11", false),
     ]);
 }
 
@@ -194,15 +200,15 @@ async function createBooks() {
             "Summary of test book 2",
             "ISBN222222",
             authors[4],
-            false
+            [genres[0], genres[1]]
         ),
         bookCreate(
             7,
-            "Licro Criado por Nicolas",
+            "Livro Criado por Nicolas",
             "O Livro mais zika do mundo",
             "ISBN333333",
-            authors[4],
-            [genres[0]]
+            authors[5],
+            [genres[4]]
         ),
     ]);
 }
@@ -260,6 +266,13 @@ async function createBookInstances() {
             "New York, NY Tom Doherty Associates, LLC, 2015.",
             false,
             "Loaned"
+        ),
+        bookInstanceCreate(
+            9,
+            books[5],
+            "São Paulo, Editora Teste, 2024.",
+            false,
+            "Available"
         ),
         bookInstanceCreate(9, books[0], "Imprint XXX2", false, false),
         bookInstanceCreate(10, books[1], "Imprint XXX3", false, false),
